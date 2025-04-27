@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/kyclops-studio",
+    "public": "dist/kyclops-studio/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
