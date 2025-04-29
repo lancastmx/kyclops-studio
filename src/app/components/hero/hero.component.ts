@@ -40,7 +40,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   </div>
 </section>
   `,
-  styleUrl: './hero.component.css',
+  styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroComponent { }

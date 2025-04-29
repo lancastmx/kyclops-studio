@@ -109,7 +109,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   </div>
 </div>
   `,
-  styleUrl: './precios.component.css',
+    styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PreciosComponent { }

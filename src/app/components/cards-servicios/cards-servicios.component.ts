@@ -96,7 +96,7 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
       </a>
     </div>
   `,
-  styleUrl: "./cards-servicios.component.css",
+   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsServiciosComponent {}
