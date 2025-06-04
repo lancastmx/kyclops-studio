@@ -23,7 +23,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
           href="#contacto"
           class="inline-block rounded-md bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-md hover:bg-indigo-700 transition-all duration-300"
         >
-          Reserva tu sesión
+        No reserves tu sesión
         </a>
       </div>
     </div>
