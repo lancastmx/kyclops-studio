@@ -27,22 +27,39 @@
       </a>
 
       <div class="mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
-        <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
-          <h3 class="text-xl font-semibold mb-4">Escucha una Muestra:</h3>
-          <div class="audio-player-custom p-4 rounded-lg shadow-lg flex items-center space-x-4">
-            <button (click)="togglePlay()" class="play-button-custom flex items-center justify-center">
-              <i #playIcon class="fas" [class.fa-play]="!audioPlaying" [class.fa-pause]="audioPlaying"></i>
-            </button>
-            <div class="flex-grow">
-              <p class="font-semibold text-sm">Podcast Demo Kyclops</p>
-              <div #seekBarContainer (click)="seekAudio($event)" class="w-full h-2 bg-gray-400 rounded-full mt-1 cursor-pointer">
-                <div #seekBarFill class="h-full bg-[#f92582] rounded-full" [style.width.%]="audioProgress"></div>
-              </div>
-              <p #audioTimeDisplay class="text-xs mt-1">{{ audioCurrentTimeFormatted }} / {{ audioDurationFormatted }}</p>
-            </div>
-          </div>
-          <audio #audioElement src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
-          </div>
+       <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
+  <h3 class="text-xl font-semibold mb-4">Escucha una Muestra:</h3>
+
+  <div *ngIf="(audioError$ | async) as errorMsg" class="my-2 p-3 bg-red-100 text-red-700 border border-red-400 rounded">
+    Error: {{ errorMsg }}
+  </div>
+
+  <div class="audio-player-custom p-4 rounded-lg shadow-lg flex items-center space-x-4">
+    <button
+      (click)="togglePlay()"
+      class="play-button-custom flex items-center justify-center"
+      [disabled]="!(isMetadataLoaded$ | async) && !(audioError$ | async)">
+      <i class="fas"
+         [class.fa-play]="!(isPlaying$ | async)"
+         [class.fa-pause]="(isPlaying$ | async)">
+      </i>
+    </button>
+    <div class="flex-grow">
+      <p class="font-semibold text-sm">Podcast Demo Kyclops</p>
+      <div
+        (click)="seekAudio($event)"
+        (touchend)="seekAudio($event)" class="w-full h-2 bg-gray-400 rounded-full mt-1 cursor-pointer"
+        [class.cursor-not-allowed]="!(isMetadataLoaded$ | async)">
+        <div class="h-full bg-[#f92582] rounded-full"
+             [style.width.%]="(progress$ | async) || 0">
+        </div>
+      </div>
+      <p class="text-xs mt-1">
+        {{ audioCurrentTimeFormatted }} / {{ audioDurationFormatted }}
+      </p>
+    </div>
+  </div>
+  </div>
 
         <div class="fade-in-up" #animatedElement style="animation-delay: 0.8s;">
           <h3 class="text-xl font-semibold mb-4 md:mt-0">Mira Nuestro Trabajo:</h3>

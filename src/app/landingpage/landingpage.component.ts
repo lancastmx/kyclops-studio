@@ -1,58 +1,79 @@
-
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef, QueryList, ViewChildren, HostListener } from '@angular/core';
+// src/app/landingpage/landingpage.component.ts
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Necesario para *ngIf, async pipe, etc.
+import { AudioService } from '../services/audio.service'; // Asegúrate que la ruta es correcta
+import { Observable, Subscription } from 'rxjs';     // Importa Observable y Subscription
 
 @Component({
-  selector: 'app-landingpage',
+  selector: 'app-landingpage', // Tu selector
   standalone: true,
-  imports: [CommonModule,],
+  imports: [
+    CommonModule,
+    // No necesitamos FormatTimePipe aquí por ahora, usaremos el método del componente
+  ],
   templateUrl: './landingpage.component.html',
   styleUrl: './landingpage.component.css'
 })
-export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy{
-    currentYear: number;
+export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
+  currentYear: number;
 
-  @ViewChildren('animatedElement') animatedElementsRef!: QueryList<ElementRef>; // Added !
+  // Las referencias @ViewChild para los elementos del reproductor de audio se eliminan,
+  // ya que el servicio maneja el objeto Audio internamente y no tendremos una etiqueta <audio> aquí.
+  // La única @ViewChildren que se mantiene es para la animación de scroll.
+  @ViewChildren('animatedElement') animatedElementsRef!: QueryList<ElementRef>;
   private observer: IntersectionObserver | null = null;
 
-  @ViewChild('audioElement') audioElementRef!: ElementRef<HTMLAudioElement>;        // Added !
-  @ViewChild('playIcon') playIconRef!: ElementRef<HTMLElement>;                  // Added !
-  @ViewChild('seekBarFill') seekBarFillRef!: ElementRef<HTMLElement>;              // Added !
-  @ViewChild('seekBarContainer') seekBarContainerRef!: ElementRef<HTMLElement>;    // Added !
-  @ViewChild('audioTimeDisplay') audioTimeDisplayRef!: ElementRef<HTMLElement>;    // Added !
+  // --- Propiedades para el estado del audio, obtenidas del servicio ---
+  isPlaying$: Observable<boolean>;
+  progress$: Observable<number>; // El progreso ya viene como porcentaje (0-100) desde el servicio
+  isMetadataLoaded$: Observable<boolean>;
+  audioError$: Observable<string | null>;
 
-  audioPlaying = false;
-  audioProgress = 0;
-  audioCurrentTimeFormatted = '0:00';
-  audioDurationFormatted = '0:00';
-  private audio!: HTMLAudioElement; // Added !
+  // Propiedades locales para mostrar el tiempo formateado
+  audioCurrentTimeFormatted: string = '0:00';
+  audioDurationFormatted: string = '0:00';
 
-  constructor() {
+  private subscriptions = new Subscription(); // Para manejar las suscripciones y desuscribirse
+
+  // Se inyecta el AudioService
+  constructor(public audioService: AudioService) { // 'public' para poder usarlo directamente en el template si quisieras
     this.currentYear = new Date().getFullYear();
+
+    // Asignamos los observables del servicio a las propiedades del componente.
+    // El template usará el pipe 'async' para suscribirse a estos.
+    this.isPlaying$ = this.audioService.isPlaying$;
+    this.progress$ = this.audioService.progress$;
+    this.isMetadataLoaded$ = this.audioService.isMetadataLoaded$;
+    this.audioError$ = this.audioService.error$;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Nos suscribimos manualmente a currentTime$ y duration$ para poder formatearlos
+    // usando el método formatTime() de este componente.
+    this.subscriptions.add(
+      this.audioService.currentTime$.subscribe(currentTime => {
+        this.audioCurrentTimeFormatted = this.formatTime(currentTime);
+      })
+    );
+
+    this.subscriptions.add(
+      this.audioService.duration$.subscribe(duration => {
+        this.audioDurationFormatted = this.formatTime(duration);
+      })
+    );
+  }
 
   ngAfterViewInit(): void {
     this.initScrollAnimations();
-    
-    // Now that audioElementRef is asserted with !, we assume it will be available.
-    // However, good practice might still involve a check if the element might conditionally not exist in the template.
-    if (this.audioElementRef && this.audioElementRef.nativeElement) {
-      this.audio = this.audioElementRef.nativeElement;
-      this.setupAudioPlayer();
-    } else {
-      console.error('Audio element not found after view init. Check template reference variable #audioElement.');
-    }
+    // Ya no necesitamos llamar a setupAudioPlayer() ni interactuar con audioElementRef aquí.
+    // El AudioService se encarga de cargar el audio en su constructor.
   }
 
   initScrollAnimations(): void {
-    // Ensure animatedElementsRef is populated
+    // Esta lógica permanece igual
     if (!this.animatedElementsRef || this.animatedElementsRef.length === 0) {
-        // console.warn('No elements found for scroll animation with #animatedElement.');
-        return;
+      return;
     }
-
     const options = { threshold: 0.1 };
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -64,93 +85,64 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy{
         }
       });
     }, options);
-
     this.animatedElementsRef.forEach(elRef => {
       (elRef.nativeElement as HTMLElement).style.animationPlayState = 'paused';
       if (this.observer) {
-         this.observer.observe(elRef.nativeElement);
+        this.observer.observe(elRef.nativeElement);
       }
     });
   }
 
-  setupAudioPlayer(): void {
-    // 'this.audio' is now definitely assigned if audioElementRef was found
-    this.audio.addEventListener('loadedmetadata', this.updateAudioTimeAndDuration);
-    this.audio.addEventListener('timeupdate', this.onTimeUpdate);
-    this.audio.addEventListener('ended', this.onAudioEnded);
-    
-    if (this.audio.readyState >= 1) {
-        this.updateAudioTimeAndDuration();
-    }
-  }
-
-  // Bound arrow functions to maintain 'this' context in event listeners
-  private updateAudioTimeAndDuration = (): void => {
-    if (this.audio && !isNaN(this.audio.duration) && isFinite(this.audio.duration)) {
-      this.audioDurationFormatted = this.formatTime(this.audio.duration);
-      this.audioCurrentTimeFormatted = this.formatTime(this.audio.currentTime);
-    } else {
-      this.audioDurationFormatted = '--:--';
-      this.audioCurrentTimeFormatted = '0:00';
-    }
-  }
-
-  private onTimeUpdate = (): void => {
-    if (this.audio && this.audio.duration) {
-      this.audioProgress = (this.audio.currentTime / this.audio.duration) * 100;
-      this.audioCurrentTimeFormatted = this.formatTime(this.audio.currentTime);
-    }
-  }
-
-  private onAudioEnded = (): void => {
-    this.audioPlaying = false;
-    this.audioProgress = 0;
-    if (this.audio) {
-        this.audio.currentTime = 0;
-    }
-    this.audioCurrentTimeFormatted = this.formatTime(0);
-  }
-
-  togglePlay(): void {
-    if (!this.audio) return;
-
-    if (this.audio.paused) {
-      this.audio.play().then(() => {
-        this.audioPlaying = true;
-      }).catch(error => console.error("Error playing audio:", error));
-    } else {
-      this.audio.pause();
-      this.audioPlaying = false;
-    }
-  }
-
+  // El método formatTime lo mantenemos en el componente por ahora.
+  // Más adelante, si quieres, se puede mover a un Pipe para limpiar el componente.
   formatTime(seconds: number): string {
-    if (isNaN(seconds) || !isFinite(seconds)) {
-        return '--:--';
+    if (isNaN(seconds) || !isFinite(seconds) || seconds < 0) {
+      return '0:00';
     }
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
   }
-  
-  seekAudio(event: MouseEvent): void {
-    if (!this.audio || !this.seekBarContainerRef || isNaN(this.audio.duration) || !isFinite(this.audio.duration)) return;
 
-    const seekBar = this.seekBarContainerRef.nativeElement;
-    const bounds = seekBar.getBoundingClientRect();
-    const clickPositionInPixels = event.clientX - bounds.left;
-    const clickPositionInPercentage = clickPositionInPixels / bounds.width;
-    this.audio.currentTime = clickPositionInPercentage * this.audio.duration;
+  // --- Los métodos de control de audio ahora llaman al servicio ---
+  togglePlay(): void {
+    this.audioService.togglePlayPause();
   }
 
+  // Este método ahora usa el evento directamente para calcular la posición,
+  // ya que no tenemos @ViewChild para seekBarContainerRef.
+  seekAudio(event: MouseEvent | TouchEvent): void {
+    const seekBarElement = event.currentTarget as HTMLElement; // El elemento que disparó el evento (el div de la barra)
+    const bounds = seekBarElement.getBoundingClientRect();
+    let clientX: number;
+
+    if (event instanceof MouseEvent) {
+      clientX = event.clientX;
+    } else if (event instanceof TouchEvent && event.touches.length > 0) {
+      clientX = event.touches[0].clientX;
+    } else {
+      return; // Tipo de evento no esperado o sin datos táctiles
+    }
+
+    const clickPositionInPixels = clientX - bounds.left;
+    const width = bounds.width;
+    if (width === 0) return; // Evitar división por cero
+
+    const clickPositionInPercentage = (clickPositionInPixels / width) * 100;
+    // Asegurar que el porcentaje esté entre 0 y 100
+    this.audioService.seekTo(Math.max(0, Math.min(100, clickPositionInPercentage)));
+  }
+
+  // Tu lógica de formulario permanece igual
   onFormSubmit(event: Event): void {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
-    console.log('Form submitted:', { name, email, message });
+    console.log('Form submitted:', {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    });
     alert('Mensaje enviado (simulación). Revisa la consola para ver los datos.');
     form.reset();
   }
@@ -160,14 +152,7 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy{
       this.observer.disconnect();
       this.observer = null;
     }
-    if (this.audio) {
-      this.audio.removeEventListener('loadedmetadata', this.updateAudioTimeAndDuration);
-      this.audio.removeEventListener('timeupdate', this.onTimeUpdate);
-      this.audio.removeEventListener('ended', this.onAudioEnded);
-      // It's also good practice to pause and nullify the src if you're cleaning up thoroughly
-      this.audio.pause();
-      this.audio.src = '';
-      // this.audio = null; // Not strictly necessary if component is destroyed, but can help GC.
-    }
+    this.subscriptions.unsubscribe(); // ¡Importante! Desuscribirse para evitar fugas de memoria.
+    // No es necesario llamar a ngOnDestroy del servicio aquí, Angular maneja los servicios 'root'.
   }
-} 
+}
