@@ -36,14 +36,15 @@
 
   <div class="audio-player-custom p-4 rounded-lg shadow-lg flex items-center space-x-4">
     <button
-      (click)="togglePlay()"
-      class="play-button-custom flex items-center justify-center"
-      [disabled]="!(isMetadataLoaded$ | async) && !(audioError$ | async)">
-      <i class="fas"
-         [class.fa-play]="!(isPlaying$ | async)"
-         [class.fa-pause]="(isPlaying$ | async)">
-      </i>
-    </button>
+  (click)="togglePlay()"
+  class="play-button-custom flex items-center justify-center"
+  [disabled]="!(isMetadataLoaded$ | async) && !(audioError$ | async)">
+
+  <i *ngIf="!(isPlaying$ | async)" class='bx bx-play-circle'></i>
+
+  <i *ngIf="isPlaying$ | async" class='bx bx-pause-circle'></i>
+
+</button>
     <div class="flex-grow">
       <p class="font-semibold text-sm">Podcast Demo Kyclops</p>
       <div
@@ -60,24 +61,16 @@
     </div>
   </div>
   </div>
-
+  
         <div class="fade-in-up" #animatedElement style="animation-delay: 0.8s;">
           <h3 class="text-xl font-semibold mb-4 md:mt-0">Mira Nuestro Trabajo:</h3>
           <div class="video-container">
-            <iframe
-              src="https://www.youtube.com/embed/TUOCH_K_94A"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen>
-            </iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/D5djlIq7hEc?si=RLbqcRBvaktQP5L_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
       </div>
     </div>
   </section>
-
   <section id="servicios" class="py-16 md:py-24 bg-white">
     <div class="container mx-auto px-6">
       <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-4">Tu Podcast: Un Activo Estratégico Fundamental</h2>
@@ -88,7 +81,7 @@
             <svg class="icon-mic" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"></path></svg>
           </div>
           <h3 class="text-xl font-semibold mb-3 text-center section-title">Humaniza tu Marca</h3>
-          <p class="text-gray-600 text-sm text-center">
+          <p class="text-gray-600 text-sm text-center"> <i class='bx bx-play-circle'></i>
             Muestra la personalidad de tu empresa y conecta genuinamente, creando una relación íntima y de confianza con tus oyentes.
           </p>
         </div>
