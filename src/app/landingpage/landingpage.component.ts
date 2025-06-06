@@ -2,6 +2,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ViewChildren, ElementRef, Inject, PLATFORM_ID, QueryList } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { AudioService, AudioTrack } from '../services/audio.service';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-landingpage',
@@ -32,17 +33,46 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
   activeTrack: AudioTrack | null = null
   constructor(
     private audioService: AudioService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private titleService: Title,
+    private metaService: Meta
   ) {
     this.currentYear = new Date().getFullYear();
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   ngOnInit(): void {
+    this.setMetaTagsForThisPage();
      this.tracks = this.audioService.getAudioTracks();
     if (this.tracks.length > 0) {
       this.selectTrack(this.tracks[0]);
     }
+  }
+  setMetaTagsForThisPage(): void {
+    const pageTitle = 'Kyclops Studio - Podcasting Estratégico para Marcas';
+    const pageDescription = 'En Kyclops Studio, transformamos tu mensaje en podcasts que conectan, fidelizan y convierten. Descubre el poder del marketing auditivo estratégico.';
+    const imageUrl = 'https://www.TU-DOMINIO.com/assets/images/kyclops-social-preview.jpg'; // ¡IMPORTANTE: Reemplaza con tu URL real!
+    const pageUrl = 'https://www.TU-DOMINIO.com/'; // ¡IMPORTANTE: Reemplaza con tu URL real!
+
+    // Establecer el título de la página
+    this.titleService.setTitle(pageTitle);
+
+    // Establecer los meta tags principales
+    this.metaService.updateTag({ name: 'description', content: pageDescription });
+    this.metaService.updateTag({ name: 'author', content: 'Kyclops Studio' });
+
+    // Establecer los meta tags de Open Graph (para Facebook, WhatsApp, etc.)
+    this.metaService.updateTag({ property: 'og:title', content: pageTitle });
+    this.metaService.updateTag({ property: 'og:description', content: pageDescription });
+    this.metaService.updateTag({ property: 'og:image', content: imageUrl });
+    this.metaService.updateTag({ property: 'og:url', content: pageUrl });
+    this.metaService.updateTag({ property: 'og:type', content: 'website' });
+
+    // Establecer los meta tags de Twitter Cards
+    this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.metaService.updateTag({ name: 'twitter:title', content: pageTitle });
+    this.metaService.updateTag({ name: 'twitter:description', content: pageDescription });
+    this.metaService.updateTag({ name: 'twitter:image', content: imageUrl });
   }
   selectTrack(track: AudioTrack): void {
     this.activeTrack = track;
