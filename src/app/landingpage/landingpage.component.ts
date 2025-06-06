@@ -1,76 +1,137 @@
 // src/app/landingpage/landingpage.component.ts
-import { Component, OnInit, AfterViewInit, OnDestroy, ViewChildren, ElementRef, QueryList } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Necesario para *ngIf, async pipe, etc.
-import { AudioService } from '../services/audio.service'; // Asegúrate que la ruta es correcta
-import { Observable, Subscription } from 'rxjs';     // Importa Observable y Subscription
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ViewChildren, ElementRef, Inject, PLATFORM_ID, QueryList } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { AudioService, AudioTrack } from '../services/audio.service';
 
 @Component({
-  selector: 'app-landingpage', // Tu selector
+  selector: 'app-landingpage',
   standalone: true,
-  imports: [
-    CommonModule,
-    // No necesitamos FormatTimePipe aquí por ahora, usaremos el método del componente
-  ],
+  imports: [CommonModule],
   templateUrl: './landingpage.component.html',
   styleUrl: './landingpage.component.css'
 })
 export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
   currentYear: number;
+  audioSrc: string = '';
 
-  // Las referencias @ViewChild para los elementos del reproductor de audio se eliminan,
-  // ya que el servicio maneja el objeto Audio internamente y no tendremos una etiqueta <audio> aquí.
-  // La única @ViewChildren que se mantiene es para la animación de scroll.
   @ViewChildren('animatedElement') animatedElementsRef!: QueryList<ElementRef>;
   private observer: IntersectionObserver | null = null;
 
-  // --- Propiedades para el estado del audio, obtenidas del servicio ---
-  isPlaying$: Observable<boolean>;
-  progress$: Observable<number>; // El progreso ya viene como porcentaje (0-100) desde el servicio
-  isMetadataLoaded$: Observable<boolean>;
-  audioError$: Observable<string | null>;
+  @ViewChild('audioPlayer') audioPlayerRef!: ElementRef<HTMLAudioElement>;
+  private audio!: HTMLAudioElement;
 
-  // Propiedades locales para mostrar el tiempo formateado
-  audioCurrentTimeFormatted: string = '0:00';
-  audioDurationFormatted: string = '0:00';
+  isPlaying = false;
+  progress = 0;
+  currentTimeFormatted = '0:00';
+  durationFormatted = '0:00';
+  isMetadataLoaded = false;
+  audioError: string | null = null;
 
-  private subscriptions = new Subscription(); // Para manejar las suscripciones y desuscribirse
-
-  // Se inyecta el AudioService
-  constructor(public audioService: AudioService) { // 'public' para poder usarlo directamente en el template si quisieras
+  private isBrowser: boolean;
+  tracks: AudioTrack[] = [];
+  activeTrack: AudioTrack | null = null
+  constructor(
+    private audioService: AudioService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.currentYear = new Date().getFullYear();
-
-    // Asignamos los observables del servicio a las propiedades del componente.
-    // El template usará el pipe 'async' para suscribirse a estos.
-    this.isPlaying$ = this.audioService.isPlaying$;
-    this.progress$ = this.audioService.progress$;
-    this.isMetadataLoaded$ = this.audioService.isMetadataLoaded$;
-    this.audioError$ = this.audioService.error$;
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   ngOnInit(): void {
-    // Nos suscribimos manualmente a currentTime$ y duration$ para poder formatearlos
-    // usando el método formatTime() de este componente.
-    this.subscriptions.add(
-      this.audioService.currentTime$.subscribe(currentTime => {
-        this.audioCurrentTimeFormatted = this.formatTime(currentTime);
-      })
-    );
-
-    this.subscriptions.add(
-      this.audioService.duration$.subscribe(duration => {
-        this.audioDurationFormatted = this.formatTime(duration);
-      })
-    );
+     this.tracks = this.audioService.getAudioTracks();
+    if (this.tracks.length > 0) {
+      this.selectTrack(this.tracks[0]);
+    }
   }
-
+  selectTrack(track: AudioTrack): void {
+    this.activeTrack = track;
+    this.audioSrc = track.src;
+    if (this.audio) {
+      this.audio.load();
+    }
+  }
   ngAfterViewInit(): void {
-    this.initScrollAnimations();
-    // Ya no necesitamos llamar a setupAudioPlayer() ni interactuar con audioElementRef aquí.
-    // El AudioService se encarga de cargar el audio en su constructor.
+    if (this.isBrowser) {
+      this.audio = this.audioPlayerRef.nativeElement;
+      this.addAudioEventListeners();
+      // Mover initScrollAnimations aquí asegura que se ejecute solo en el navegador
+      this.initScrollAnimations();
+    }
   }
 
+  addAudioEventListeners(): void {
+    this.audio.addEventListener('loadedmetadata', this.updateAudioDetails);
+    this.audio.addEventListener('timeupdate', this.updateTime);
+    this.audio.addEventListener('ended', this.onAudioEnded);
+    this.audio.addEventListener('error', this.handleAudioError);
+    this.audio.addEventListener('playing', () => this.isPlaying = true);
+    this.audio.addEventListener('pause', () => this.isPlaying = false);
+  }
+
+  removeAudioEventListeners(): void {
+    if (this.audio) {
+      this.audio.removeEventListener('loadedmetadata', this.updateAudioDetails);
+      this.audio.removeEventListener('timeupdate', this.updateTime);
+      this.audio.removeEventListener('ended', this.onAudioEnded);
+      this.audio.removeEventListener('error', this.handleAudioError);
+      this.audio.removeEventListener('playing', () => this.isPlaying = true);
+      this.audio.removeEventListener('pause', () => this.isPlaying = false);
+    }
+  }
+
+  updateAudioDetails = (): void => {
+    this.durationFormatted = this.formatTime(this.audio.duration);
+    this.isMetadataLoaded = true;
+  };
+
+  updateTime = (): void => {
+    this.currentTimeFormatted = this.formatTime(this.audio.currentTime);
+    this.progress = (this.audio.currentTime / this.audio.duration) * 100;
+  };
+
+  onAudioEnded = (): void => {
+    this.isPlaying = false;
+    this.audio.currentTime = 0;
+  };
+
+  handleAudioError = (): void => {
+    this.audioError = "No se pudo cargar el archivo de audio. Verifica la ruta o el formato.";
+  };
+
+  togglePlay(): void {
+    if (!this.isBrowser || !this.isMetadataLoaded) return;
+
+    if (this.audio.paused) {
+      this.audio.play();
+    } else {
+      this.audio.pause();
+    }
+  }
+
+  seekAudio(event: MouseEvent): void {
+    if (!this.isBrowser || !this.isMetadataLoaded) return;
+    const seekBarElement = event.currentTarget as HTMLElement;
+    const bounds = seekBarElement.getBoundingClientRect();
+    const clickPositionInPercentage = (event.clientX - bounds.left) / bounds.width;
+    this.audio.currentTime = clickPositionInPercentage * this.audio.duration;
+  }
+
+  // ✅ MÉTODO CORREGIDO
+  formatTime(seconds: number): string {
+    // Primero, manejamos casos donde la entrada no es un número válido.
+    if (isNaN(seconds) || !isFinite(seconds) || seconds < 0) {
+      return '0:00'; // Siempre devolvemos un string
+    }
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+
+    // Devolvemos la cadena formateada.
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+
+  // ✅ MÉTODO CORREGIDO (asegurándonos de que está la lógica completa)
   initScrollAnimations(): void {
-    // Esta lógica permanece igual
     if (!this.animatedElementsRef || this.animatedElementsRef.length === 0) {
       return;
     }
@@ -85,6 +146,7 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     }, options);
+
     this.animatedElementsRef.forEach(elRef => {
       (elRef.nativeElement as HTMLElement).style.animationPlayState = 'paused';
       if (this.observer) {
@@ -93,47 +155,7 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  // El método formatTime lo mantenemos en el componente por ahora.
-  // Más adelante, si quieres, se puede mover a un Pipe para limpiar el componente.
-  formatTime(seconds: number): string {
-    if (isNaN(seconds) || !isFinite(seconds) || seconds < 0) {
-      return '0:00';
-    }
-    const minutes = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-  }
-
-  // --- Los métodos de control de audio ahora llaman al servicio ---
-  togglePlay(): void {
-    this.audioService.togglePlayPause();
-  }
-
-  // Este método ahora usa el evento directamente para calcular la posición,
-  // ya que no tenemos @ViewChild para seekBarContainerRef.
-  seekAudio(event: MouseEvent | TouchEvent): void {
-    const seekBarElement = event.currentTarget as HTMLElement; // El elemento que disparó el evento (el div de la barra)
-    const bounds = seekBarElement.getBoundingClientRect();
-    let clientX: number;
-
-    if (event instanceof MouseEvent) {
-      clientX = event.clientX;
-    } else if (event instanceof TouchEvent && event.touches.length > 0) {
-      clientX = event.touches[0].clientX;
-    } else {
-      return; // Tipo de evento no esperado o sin datos táctiles
-    }
-
-    const clickPositionInPixels = clientX - bounds.left;
-    const width = bounds.width;
-    if (width === 0) return; // Evitar división por cero
-
-    const clickPositionInPercentage = (clickPositionInPixels / width) * 100;
-    // Asegurar que el porcentaje esté entre 0 y 100
-    this.audioService.seekTo(Math.max(0, Math.min(100, clickPositionInPercentage)));
-  }
-
-  // Tu lógica de formulario permanece igual
+  // ✅ MÉTODO CORREGIDO (asegurándonos de que está la lógica completa)
   onFormSubmit(event: Event): void {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -148,11 +170,11 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.isBrowser) {
+      this.removeAudioEventListeners();
+    }
     if (this.observer) {
       this.observer.disconnect();
-      this.observer = null;
     }
-    this.subscriptions.unsubscribe(); // ¡Importante! Desuscribirse para evitar fugas de memoria.
-    // No es necesario llamar a ngOnDestroy del servicio aquí, Angular maneja los servicios 'root'.
   }
 }
