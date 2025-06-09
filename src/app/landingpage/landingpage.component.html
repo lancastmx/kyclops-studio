@@ -8,7 +8,12 @@
         <a href="#servicios" class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base">Servicios</a>
         <a href="#proceso" class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base">Proceso</a>
         <a href="#por-que-nosotros" class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base">¿Por Qué Nosotros?</a>
-        <a href="#contacto" class="cta-button px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-sm sm:text-base">¡Hablemos!</a>
+        <button
+  (click)="getWhatsAppLink('¡Hola! Me gustaría hablar con ustedes.', true)"
+  class="cta-button px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-sm sm:text-base"
+>
+  ¡Hablemos!
+</button>
       </nav>
     </div>
   </header>
@@ -22,15 +27,14 @@
         En Kyclops Studio, transformamos tu mensaje en podcasts que conectan, fidelizan y convierten.
         Descubre el poder de la voz para hacer crecer tu negocio.
       </p>
-      <a
-  href="https://wa.me/5523464163?text=¡Hola!%20Me%20interesa%20lanzar%20mi%20podcast."
-  target="_blank"
+      <button
+  (click)="getWhatsAppLink('¡Hola! Me interesa lanzar mi podcast.', true)"
   class="cta-button text-lg md:text-xl px-8 py-3 md:px-10 md:py-4 rounded-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 inline-block fade-in-up"
   #animatedElement
   style="animation-delay: 0.4s;"
 >
   Lanza tu Podcast Hoy
-</a>
+</button>
 
       <div class="mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
        <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
@@ -198,14 +202,15 @@
           <p class="text-sm opacity-80">Enfoque en crecimiento y ROI.</p>
         </div>
       </div>
-      <a href="#contacto"
-   class="cta-button text-base sm:text-lg md:text-xl px-6 py-2 sm:px-8 sm:py-3 md:px-10 md:py-4 
-          rounded-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 
-          inline-block fade-in-up" 
-   #animatedElement 
-   style="animation-delay: 0.6s;">
-    Solicita tu Consulta Estratégica
-</a>
+      <button
+  (click)="getWhatsAppLink('¡Hola! Me gustaría solicitar una consulta estratégica.', true)"
+  class="cta-button text-base sm:text-lg md:text-xl px-6 py-2 sm:px-8 sm:py-3 md:px-10 md:py-4
+         rounded-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105
+         inline-block fade-in-up"
+  #animatedElement
+  style="animation-delay: 0.6s;">
+  Solicita tu Consulta Estratégica
+</button>
     </div>
   </section>
 

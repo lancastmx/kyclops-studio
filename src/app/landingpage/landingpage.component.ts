@@ -15,7 +15,7 @@ import { socialLinks, SocialLink } from '../core/constants/social-links'; // Aju
 export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
   currentYear: number;
   audioSrc: string = '';
-
+  whatsAppPhoneNumber: string = '5523464163';
   @ViewChildren('animatedElement') animatedElementsRef!: QueryList<ElementRef>;
   private observer: IntersectionObserver | null = null;
 
@@ -49,6 +49,17 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.selectTrack(this.tracks[0]);
     }
   }
+  // En landingpage.component.ts
+getWhatsAppLink(message: string, openInNewTab: boolean = false): void { // <-- Aquí está el segundo argumento
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/${this.whatsAppPhoneNumber}?text=${encodedMessage}`;
+
+  if (openInNewTab) {
+    window.open(whatsappUrl, '_blank');
+  } else {
+    window.location.href = whatsappUrl;
+  }
+}
   setMetaTagsForThisPage(): void {
     const pageTitle = 'Kyclops Studio - Podcasting Estratégico para Marcas';
     const pageDescription = 'En Kyclops Studio, transformamos tu mensaje en podcasts que conectan, fidelizan y convierten. Descubre el poder del marketing auditivo estratégico.';
