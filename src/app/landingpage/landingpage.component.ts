@@ -13,6 +13,7 @@ import { socialLinks, SocialLink } from '../core/constants/social-links'; // Aju
   styleUrl: './landingpage.component.css'
 })
 export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
+  isSidebarOpen: boolean = false; 
   currentYear: number;
   audioSrc: string = '';
   whatsAppPhoneNumber: string = '5523464163';
@@ -48,6 +49,13 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.tracks.length > 0) {
       this.selectTrack(this.tracks[0]);
     }
+  }
+   toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  closeSidebar(): void {
+    this.isSidebarOpen = false;
   }
   // En landingpage.component.ts
 getWhatsAppLink(message: string, openInNewTab: boolean = false): void { // <-- Aquí está el segundo argumento

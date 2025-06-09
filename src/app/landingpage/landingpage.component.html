@@ -1,22 +1,132 @@
 <div class="bg-gray-50 text-gray-800">
   <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="#" class="text-3xl font-bold text-gray-800">
-        <span class="text-[#1a1a2e]">Kyclops</span><span class="text-[#f92582]">Studio</span>
-      </a>
-      <nav class="space-x-2 sm:space-x-4">
-        <a href="#servicios" class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base">Servicios</a>
-        <a href="#proceso" class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base">Proceso</a>
-        <a href="#por-que-nosotros" class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base">¿Por Qué Nosotros?</a>
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center relative">
+    <a href="#" class="text-3xl font-bold text-gray-800 z-20">
+      <span class="text-[#1a1a2e]">Kyclops</span><span class="text-[#f92582]">Studio</span>
+    </a>
+
+    <button
+      class="md:hidden text-gray-600 hover:text-[#f92582] focus:outline-none z-20"
+      (click)="toggleSidebar()"
+      aria-label="Toggle navigation"
+    >
+      <svg
+        class="h-8 w-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
+      </svg>
+    </button>
+
+    <nav class="hidden md:flex space-x-2 sm:space-x-4 items-center">
+      <a
+        href="#servicios"
+        class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
+        >Servicios</a
+      >
+      <a
+        href="#proceso"
+        class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
+        >Proceso</a
+      >
+      <a
+        href="#por-que-nosotros"
+        class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
+        >¿Por Qué Nosotros?</a
+      >
+      <a
+        href="https://www.kyclopsradio.com"
+        target="_blank"
+        class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
+        >Conócenos</a
+      >
+      <button
+        (click)="getWhatsAppLink('¡Hola! Me gustaría hablar con ustedes.', true)"
+        class="cta-button px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-sm sm:text-base"
+      >
+        ¡Hablemos!
+      </button>
+    </nav>
+
+    <div
+      [ngClass]="{
+        'translate-x-full': !isSidebarOpen,
+        'translate-x-0': isSidebarOpen
+      }"
+      class="fixed inset-y-0 right-0 w-64 bg-[#1a1a2e] text-white p-6 shadow-xl
+             transform transition-transform duration-300 ease-in-out z-40 md:hidden"
+    >
+      <button
+        class="absolute top-4 right-4 text-gray-300 hover:text-[#f92582] focus:outline-none"
+        (click)="toggleSidebar()"
+        aria-label="Close navigation"
+      >
+        <svg
+          class="h-8 w-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+
+      <nav class="flex flex-col space-y-6 mt-16">
+        <a
+          href="#servicios"
+          (click)="closeSidebar()"
+          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+          >Servicios</a
+        >
+        <a
+          href="#proceso"
+          (click)="closeSidebar()"
+          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+          >Proceso</a
+        >
+        <a
+          href="#por-que-nosotros"
+          (click)="closeSidebar()"
+          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+          >¿Por Qué Nosotros?</a
+        >
+        <a
+          href="https://www.kyclopsradio.com"
+          target="_blank"
+          (click)="closeSidebar()"
+          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+          >Conócenos</a
+        >
         <button
-  (click)="getWhatsAppLink('¡Hola! Me gustaría hablar con ustedes.', true)"
-  class="cta-button px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-sm sm:text-base"
->
-  ¡Hablemos!
-</button>
+          (click)="getWhatsAppLink('¡Hola! Me gustaría hablar con ustedes desde el menú móvil.', true); closeSidebar();"
+          class="cta-button mt-4 px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-lg"
+        >
+          ¡Hablemos!
+        </button>
       </nav>
     </div>
-  </header>
+
+    <div
+      *ngIf="isSidebarOpen"
+      class="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+      (click)="closeSidebar()"
+    ></div>
+  </div>
+</header>
 
   <section class="hero-bg text-white py-16 md:py-24">
     <div class="container mx-auto px-6 text-center">
