@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ViewChildren, E
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { AudioService, AudioTrack } from '../services/audio.service';
 import { Title, Meta } from '@angular/platform-browser';
+import { socialLinks, SocialLink } from '../core/constants/social-links'; // Ajusta la ruta si es necesario
 
 @Component({
   selector: 'app-landingpage',
@@ -20,7 +21,7 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('audioPlayer') audioPlayerRef!: ElementRef<HTMLAudioElement>;
   private audio!: HTMLAudioElement;
-
+  socialMediaLinks: SocialLink[] = socialLinks;
   isPlaying = false;
   progress = 0;
   currentTimeFormatted = '0:00';
@@ -51,8 +52,8 @@ export class LandingpageComponent implements OnInit, AfterViewInit, OnDestroy {
   setMetaTagsForThisPage(): void {
     const pageTitle = 'Kyclops Studio - Podcasting Estratégico para Marcas';
     const pageDescription = 'En Kyclops Studio, transformamos tu mensaje en podcasts que conectan, fidelizan y convierten. Descubre el poder del marketing auditivo estratégico.';
-    const imageUrl = 'https://www.TU-DOMINIO.com/assets/images/kyclops-social-preview.jpg'; // ¡IMPORTANTE: Reemplaza con tu URL real!
-    const pageUrl = 'https://www.TU-DOMINIO.com/'; // ¡IMPORTANTE: Reemplaza con tu URL real!
+    const imageUrl = 'https://www.kyclopsradio.com/assets/images/kyclops-social-preview.jpg'; // ¡IMPORTANTE: Reemplaza con tu URL real!
+    const pageUrl = 'https://www.kyclopsradio.com/'; // ¡IMPORTANTE: Reemplaza con tu URL real!
 
     // Establecer el título de la página
     this.titleService.setTitle(pageTitle);
