@@ -49,7 +49,7 @@
         >Conócenos</a
       >
       <button
-        (click)="getWhatsAppLink('¡Hola! Me gustaría hablar con ustedes.', true)"
+        (click)="openWhatsAppChat('¡Hola! Me gustaría hablar con ustedes.')"
         class="cta-button px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-sm sm:text-base"
       >
         ¡Hablemos!
@@ -112,7 +112,7 @@
           >Conócenos</a
         >
         <button
-          (click)="getWhatsAppLink('¡Hola! Me gustaría hablar con ustedes desde el menú móvil.', true); closeSidebar();"
+          (click)="openWhatsAppChat('¡Hola! Me gustaría hablar con ustedes desde el menú móvil.'); closeSidebar();"
           class="cta-button mt-4 px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-lg"
         >
           ¡Hablemos!
@@ -138,7 +138,7 @@
         Descubre el poder de la voz para hacer crecer tu negocio.
       </p>
       <button
-  (click)="getWhatsAppLink('¡Hola! Me interesa lanzar mi podcast.', true)"
+  (click)="openWhatsAppChat('¡Hola! Me interesa lanzar mi podcast.')"
   class="cta-button text-lg md:text-xl px-8 py-3 md:px-10 md:py-4 rounded-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 inline-block fade-in-up"
   #animatedElement
   style="animation-delay: 0.4s;"
@@ -313,7 +313,7 @@
         </div>
       </div>
       <button
-  (click)="getWhatsAppLink('¡Hola! Me gustaría solicitar una consulta estratégica.', true)"
+  (click)="openWhatsAppChat('¡Hola! Me gustaría solicitar una consulta estratégica.')"
   class="cta-button text-base sm:text-lg md:text-xl px-6 py-2 sm:px-8 sm:py-3 md:px-10 md:py-4
          rounded-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105
          inline-block fade-in-up"
