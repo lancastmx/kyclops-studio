@@ -127,7 +127,6 @@
     ></div>
   </div>
 </header>
-
   <section class="hero-bg text-white py-16 md:py-24">
     <div class="container mx-auto px-6 text-center">
       <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight fade-in-up" #animatedElement>
@@ -209,6 +208,11 @@
           <p class="text-gray-600 text-sm text-center">
             Muestra la personalidad de tu empresa y conecta genuinamente, creando una relación íntima y de confianza con tus oyentes.
           </p>
+          <div class="max-w-xl mx-auto">
+            <div *ngIf="tracks.length > 0">
+                <app-audio-player [track]="tracks[2]"></app-audio-player>
+            </div>
+        </div>
         </div>
         <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.1s;">
           <div class="flex justify-center">
@@ -218,6 +222,11 @@
           <p class="text-gray-600 text-sm text-center">
             Comparte tu conocimiento, ofrece soluciones y establece tu empresa como un referente indiscutible en tu sector.
           </p>
+          <div class="max-w-xl mx-auto">
+            <div *ngIf="tracks.length > 0">
+                <app-audio-player [track]="tracks[0]"></app-audio-player>
+            </div>
+        </div>
         </div>
         <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.2s;">
             <div class="flex justify-center">
@@ -227,6 +236,11 @@
           <p class="text-gray-600 text-sm text-center">
             Genera espacios de cercanía y una conexión profunda que se traduce en lealtad duradera y embajadores de marca.
           </p>
+          <div class="max-w-xl mx-auto">
+            <div *ngIf="tracks.length > 0">
+                <app-audio-player [track]="tracks[0]"></app-audio-player>
+            </div>
+        </div>
         </div>
         <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.3s;">
           <div class="flex justify-center">
@@ -236,6 +250,11 @@
           <p class="text-gray-600 text-sm text-center">
             Mejora tu SEO, genera conversiones, expande tu red de contactos y diversifica tus ingresos (patrocinios, afiliados, etc.).
           </p>
+          <div class="max-w-xl mx-auto">
+            <div *ngIf="tracks.length > 0">
+                <app-audio-player [track]="tracks[0]"></app-audio-player>
+            </div>
+        </div>
         </div>
           <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.4s;">
           <div class="flex justify-center">
@@ -245,6 +264,11 @@
           <p class="text-gray-600 text-sm text-center">
             Transforma cada episodio en múltiples activos: blogs, newsletters, videopodcasts, clips para redes sociales (Shorts, Reels, TikToks).
           </p>
+          <div class="max-w-xl mx-auto">
+            <div *ngIf="tracks.length > 0">
+                <app-audio-player [track]="tracks[0]"></app-audio-player>
+            </div>
+        </div>
         </div>
           <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.5s;">
           <div class="flex justify-center">
@@ -254,6 +278,11 @@
           <p class="text-gray-600 text-sm text-center">
             El podcasting ofrece un gran retorno con una inversión inicial controlada y alta capacidad de engagement.
           </p>
+          <div class="max-w-xl mx-auto">
+            <div *ngIf="tracks.length > 0">
+                <app-audio-player [track]="tracks[0]"></app-audio-player>
+            </div>
+        </div>
         </div>
       </div>
     </div>

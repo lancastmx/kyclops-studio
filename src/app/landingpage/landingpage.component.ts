@@ -4,11 +4,11 @@ import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { AudioService, AudioTrack } from '../services/audio.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { socialLinks, SocialLink } from '../core/constants/social-links'; // Ajusta la ruta si es necesario
-
+import { AudioPlayerComponent } from '../shared/components/audio-player/audio-player.component';
 @Component({
   selector: 'app-landingpage',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AudioPlayerComponent ],
   templateUrl: './landingpage.component.html',
   styleUrl: './landingpage.component.css'
 })

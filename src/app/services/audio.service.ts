@@ -22,6 +22,10 @@ export class AudioService {
     {
       title: 'Pixel Paradise',
       src: 'assets/pixelParadise.mp3'
+    },
+    { 
+      title: 'Humaniza tu Marca',
+      src: 'assets/audio/humanizaMarca.wav'
     }
   ];
 

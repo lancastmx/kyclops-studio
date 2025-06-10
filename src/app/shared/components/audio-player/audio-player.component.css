@@ -1,0 +1,78 @@
+body {
+    font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background-color: #1a1a2e; /* Un azul oscuro/morado profundo para Kyclops */
+        }
+        .cta-button {
+            background-color: #f92582; /* Un rosa vibrante para el CTA */
+            color: white;
+        }
+        .cta-button:hover {
+            background-color: #e01e70;
+        }
+        .section-title {
+            color: #1a1a2e;
+        }
+        .benefit-card {
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .process-step {
+            border-left: 3px solid #f92582;
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .icon-mic, .icon-chart, .icon-users, .icon-megaphone, .icon-recycle, .icon-piggy-bank {
+            width: 40px; height: 40px; fill: #f92582; margin-bottom: 10px;
+        }
+        .audio-player-custom {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        .play-button-custom {
+            background-color: #f92582;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .play-button-custom:hover {
+            background-color: #e01e70;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* shadow-xl */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        
