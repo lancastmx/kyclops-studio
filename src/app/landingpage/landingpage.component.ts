@@ -170,8 +170,6 @@ openWhatsAppChat(message: string): void { // Renombramos la función para ser m�
     }
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
-
-    // Devolvemos la cadena formateada.
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
   }
 
@@ -200,19 +198,6 @@ openWhatsAppChat(message: string): void { // Renombramos la función para ser m�
     });
   }
 
-  // ✅ MÉTODO CORREGIDO (asegurándonos de que está la lógica completa)
-  onFormSubmit(event: Event): void {
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
-    const formData = new FormData(form);
-    console.log('Form submitted:', {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message')
-    });
-    alert('Mensaje enviado (simulación). Revisa la consola para ver los datos.');
-    form.reset();
-  }
 
   ngOnDestroy(): void {
     if (this.isBrowser) {
@@ -222,4 +207,5 @@ openWhatsAppChat(message: string): void { // Renombramos la función para ser m�
       this.observer.disconnect();
     }
   }
+  
 }
