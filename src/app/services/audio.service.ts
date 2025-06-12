@@ -26,7 +26,11 @@ export class AudioService {
     { 
       title: 'Humaniza tu Marca',
       src: 'assets/audio/humanizaMarca.wav'
-    }
+    },
+    { 
+      title: 'Posiciónate como Autoridad',
+      src: 'assets/audio/posiciónatecomoAutoridad.wav'
+    },
   ];
 
   constructor() { }
