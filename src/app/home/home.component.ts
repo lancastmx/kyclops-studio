@@ -7,6 +7,7 @@ import { AboutComponent } from "../components/about/about.component";
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [HeroComponent, CardsServiciosComponent, PreciosComponent, FooterComponent, AboutComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
