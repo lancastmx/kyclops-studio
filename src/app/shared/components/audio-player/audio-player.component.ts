@@ -1,11 +1,11 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { AudioTrack } from '../../../services/audio.service'; // Ajusta la ruta si 'data' no está en 'app/'
 
 @Component({
   selector: 'app-audio-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './audio-player.component.html',
   styleUrls: ['./audio-player.component.css']
 })

@@ -1,375 +1,394 @@
 <div class="bg-gray-50 text-gray-800">
   <header class="bg-white shadow-md sticky top-0 z-50">
-  <div class="container mx-auto px-6 py-4 flex justify-between items-center relative">
-    <a href="#" class="text-3xl font-bold text-gray-800 z-20">
-      <span class="text-[#1a1a2e]">Kyclops</span><span class="text-[#f92582]">Studio</span>
-    </a>
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center relative">
+      <a href="#" class="text-3xl font-bold text-gray-800 z-20">
+        <span class="text-[#1a1a2e]">Kyclops</span><span class="text-[#f92582]">Studio</span>
+      </a>
 
-    <button
-      class="md:hidden text-gray-600 hover:text-[#f92582] focus:outline-none z-20"
-      (click)="toggleSidebar()"
-      aria-label="Toggle navigation"
-    >
-      <svg
-        class="h-8 w-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        ></path>
-      </svg>
-    </button>
-
-    <nav class="hidden md:flex space-x-2 sm:space-x-4 items-center">
-      <a
-        href="#servicios"
-        class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
-        >Servicios</a
-      >
-      <a
-        href="#proceso"
-        class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
-        >Proceso</a
-      >
-      <a
-        href="#por-que-nosotros"
-        class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
-        >¿Por Qué Nosotros?</a
-      >
-      <a
-        href="https://www.kyclopsradio.com"
-        target="_blank"
-        class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
-        >Conócenos</a
-      >
       <button
-        (click)="openWhatsAppChat('¡Hola! Me gustaría hablar con ustedes.')"
-        class="cta-button px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-sm sm:text-base"
-      >
-        ¡Hablemos!
-      </button>
-    </nav>
-
-    <div
-      [ngClass]="{
-        'translate-x-full': !isSidebarOpen,
-        'translate-x-0': isSidebarOpen
-      }"
-      class="fixed inset-y-0 right-0 w-64 bg-[#1a1a2e] text-white p-6 shadow-xl
-             transform transition-transform duration-300 ease-in-out z-40 md:hidden"
-    >
-      <button
-        class="absolute top-4 right-4 text-gray-300 hover:text-[#f92582] focus:outline-none"
+        class="md:hidden text-gray-600 hover:text-[#f92582] focus:outline-none z-20"
         (click)="toggleSidebar()"
-        aria-label="Close navigation"
-      >
+        aria-label="Toggle navigation"
+        >
         <svg
           class="h-8 w-8"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
-        >
+          >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
+            d="M4 6h16M4 12h16M4 18h16"
           ></path>
         </svg>
       </button>
 
-      <nav class="flex flex-col space-y-6 mt-16">
+      <nav class="hidden md:flex space-x-2 sm:space-x-4 items-center">
         <a
           href="#servicios"
-          (click)="closeSidebar()"
-          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+          class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
           >Servicios</a
-        >
-        <a
-          href="#proceso"
-          (click)="closeSidebar()"
-          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
-          >Proceso</a
-        >
-        <a
-          href="#por-que-nosotros"
-          (click)="closeSidebar()"
-          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
-          >¿Por Qué Nosotros?</a
-        >
-        <a
-          href="https://www.kyclopsradio.com"
-          target="_blank"
-          (click)="closeSidebar()"
-          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
-          >Conócenos</a
-        >
-        <button
-          (click)="openWhatsAppChat('¡Hola! Me gustaría hablar con ustedes desde el menú móvil.'); closeSidebar();"
-          class="cta-button mt-4 px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-lg"
-        >
-          ¡Hablemos!
-        </button>
-      </nav>
-    </div>
+          >
+          <a
+            href="#proceso"
+            class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
+            >Proceso</a
+            >
+            <a
+              href="#por-que-nosotros"
+              class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
+              >¿Por Qué Nosotros?</a
+              >
+              <a
+                href="https://www.kyclopsradio.com"
+                target="_blank"
+                class="text-gray-600 hover:text-[#f92582] transition duration-300 text-sm sm:text-base"
+                >Conócenos</a
+                >
+                <button
+                  (click)="openWhatsAppChat('¡Hola! Me gustaría hablar con ustedes.')"
+                  class="cta-button px-4 py-2 sm:px-6 sm:py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-sm sm:text-base"
+                  >
+                  ¡Hablemos!
+                </button>
+              </nav>
 
-    <div
-      *ngIf="isSidebarOpen"
-      class="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
-      (click)="closeSidebar()"
-    ></div>
-  </div>
-</header>
-  <section class="hero-bg text-white py-16 md:py-24">
-    <div class="container mx-auto px-6 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight fade-in-up" #animatedElement>
-        Potencia tu Marca con <span class="text-[#f92582]">Marketing Auditivo</span> Estratégico
-      </h1>
-      <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto fade-in-up" #animatedElement style="animation-delay: 0.2s;">
-        En Kyclops Studio, transformamos tu mensaje en podcasts que conectan, fidelizan y convierten.
-        Descubre el poder de la voz para hacer crecer tu negocio.
-      </p>
-      <button
-  (click)="openWhatsAppChat('¡Hola! Me interesa lanzar mi podcast.')"
-  class="cta-button text-lg md:text-xl px-8 py-3 md:px-10 md:py-4 rounded-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 inline-block fade-in-up"
-  #animatedElement
-  style="animation-delay: 0.4s;"
->
-  Lanza tu Podcast Hoy
-</button>
+              <div
+      [ngClass]="{
+        'translate-x-full': !isSidebarOpen,
+        'translate-x-0': isSidebarOpen
+      }"
+      class="fixed inset-y-0 right-0 w-64 bg-[#1a1a2e] text-white p-6 shadow-xl
+             transform transition-transform duration-300 ease-in-out z-40 md:hidden"
+                >
+                <button
+                  class="absolute top-4 right-4 text-gray-300 hover:text-[#f92582] focus:outline-none"
+                  (click)="toggleSidebar()"
+                  aria-label="Close navigation"
+                  >
+                  <svg
+                    class="h-8 w-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                </button>
 
-      <div class="mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
-       <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
+                <nav class="flex flex-col space-y-6 mt-16">
+                  <a
+                    href="#servicios"
+                    (click)="closeSidebar()"
+                    class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+                    >Servicios</a
+                    >
+                    <a
+                      href="#proceso"
+                      (click)="closeSidebar()"
+                      class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+                      >Proceso</a
+                      >
+                      <a
+                        href="#por-que-nosotros"
+                        (click)="closeSidebar()"
+                        class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+                        >¿Por Qué Nosotros?</a
+                        >
+                        <a
+                          href="https://www.kyclopsradio.com"
+                          target="_blank"
+                          (click)="closeSidebar()"
+                          class="text-xl font-medium hover:text-[#f92582] transition duration-300"
+                          >Conócenos</a
+                          >
+                          <button
+                            (click)="openWhatsAppChat('¡Hola! Me gustaría hablar con ustedes desde el menú móvil.'); closeSidebar();"
+                            class="cta-button mt-4 px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 text-lg"
+                            >
+                            ¡Hablemos!
+                          </button>
+                        </nav>
+                      </div>
 
- <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
-  <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
-  <h3 class="text-xl font-semibold mb-4">Escucha una Muestra:</h3>
+                      @if (isSidebarOpen) {
+                        <div
+                          class="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+                          (click)="closeSidebar()"
+                        ></div>
+                      }
+                    </div>
+                  </header>
+                  <section class="hero-bg text-white py-16 md:py-24">
+                    <div class="container mx-auto px-6 text-center">
+                      <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight fade-in-up" #animatedElement>
+                        Potencia tu Marca con <span class="text-[#f92582]">Marketing Auditivo</span> Estratégico
+                      </h1>
+                      <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto fade-in-up" #animatedElement style="animation-delay: 0.2s;">
+                        En Kyclops Studio, transformamos tu mensaje en podcasts que conectan, fidelizan y convierten.
+                        Descubre el poder de la voz para hacer crecer tu negocio.
+                      </p>
+                      <button
+                        (click)="openWhatsAppChat('¡Hola! Me interesa lanzar mi podcast.')"
+                        class="cta-button text-lg md:text-xl px-8 py-3 md:px-10 md:py-4 rounded-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 inline-block fade-in-up"
+                        #animatedElement
+                        style="animation-delay: 0.4s;"
+                        >
+                        Lanza tu Podcast Hoy
+                      </button>
 
-  <div *ngIf="audioError" class="my-2 p-3 bg-red-100 text-red-700 border border-red-400 rounded">
-    Error: {{ audioError }}
-  </div>
+                      <div class="mt-10 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
+                        <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
 
-  <div class="audio-player-custom p-4 rounded-lg shadow-lg flex items-center space-x-4">
-    <button
-      (click)="togglePlay()"
-      class="play-button-custom flex items-center justify-center"
-      [disabled]="!isMetadataLoaded">
-      <i *ngIf="!isPlaying" class='bx bx-play-circle'></i>
-      <i *ngIf="isPlaying" class='bx bx-pause-circle'></i>
-    </button>
-    <div class="flex-grow">
-      <p class="font-semibold text-sm">Podcast Demo Kyclops</p>
-      <div
-        (click)="seekAudio($event)"
-        class="w-full h-2 bg-gray-400 rounded-full mt-1 cursor-pointer"
-        [class.cursor-not-allowed]="!isMetadataLoaded">
-        <div class="h-full bg-[#f92582] rounded-full"
-             [style.width.%]="progress || 0">
-        </div>
-      </div>
-      <p class="text-xs mt-1">
-        {{ currentTimeFormatted }} / {{ durationFormatted }}
-      </p>
-    </div>
-  </div>
+                          <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
+                            <div class="fade-in-up" #animatedElement style="animation-delay: 0.6s;">
+                              <h3 class="text-xl font-semibold mb-4">Escucha una Muestra:</h3>
 
-  <audio #audioPlayer [src]="audioSrc" preload="metadata" hidden></audio>
-</div>
+                              @if (audioError) {
+                                <div class="my-2 p-3 bg-red-100 text-red-700 border border-red-400 rounded">
+                                  Error: {{ audioError }}
+                                </div>
+                              }
 
-  </div>
-  </div>
-  
-        <div class="fade-in-up" #animatedElement style="animation-delay: 0.8s;">
-          <h3 class="text-xl font-semibold mb-4 md:mt-0">Mira Nuestro Trabajo:</h3>
-          <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/D5djlIq7hEc?si=RLbqcRBvaktQP5L_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="servicios" class="py-16 md:py-24 bg-white">
-    <div class="container mx-auto px-6">
-      <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-4">Tu Podcast: Un Activo Estratégico Fundamental</h2>
-      <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">Con Kyclops Studio, tu podcast logrará objetivos clave para tu negocio:</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement>
-          <div class="flex justify-center">
-            <svg class="icon-mic" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 text-center section-title">Humaniza tu Marca</h3>
-          <p class="text-gray-600 text-sm text-center">
-            Muestra la personalidad de tu empresa y conecta genuinamente, creando una relación íntima y de confianza con tus oyentes.
-          </p>
-          <div class="max-w-xl mx-auto">
-            <div *ngIf="tracks.length > 0">
-                <app-audio-player [track]="tracks[2]"></app-audio-player>
-            </div>
-        </div>
-        </div>
-        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.1s;">
-          <div class="flex justify-center">
-              <svg class="icon-chart" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 text-center section-title">Posiciónate como Autoridad</h3>
-          <p class="text-gray-600 text-sm text-center">
-            Comparte tu conocimiento, ofrece soluciones y establece tu empresa como un referente indiscutible en tu sector.
-          </p>
-          <div class="max-w-xl mx-auto">
-            <div *ngIf="tracks.length > 0">
-                <app-audio-player [track]="tracks[3]"></app-audio-player>
-            </div>
-        </div>
-        </div>
-        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.2s;">
-            <div class="flex justify-center">
-              <svg class="icon-users" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
-            </div>
-          <h3 class="text-xl font-semibold mb-3 text-center section-title">Fideliza a tu Audiencia</h3>
-          <p class="text-gray-600 text-sm text-center">
-            Genera espacios de cercanía y una conexión profunda que se traduce en lealtad duradera y embajadores de marca.
-          </p>
-          <div class="max-w-xl mx-auto">
-            <div *ngIf="tracks.length > 0">
-                <app-audio-player [track]="tracks[1]"></app-audio-player>
-            </div>
-        </div>
-        </div>
-        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.3s;">
-          <div class="flex justify-center">
-            <svg class="icon-megaphone" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12zM7 9h10v2H7zm0-4h10v2H7z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 text-center section-title">Aumenta tu Visibilidad</h3>
-          <p class="text-gray-600 text-sm text-center">
-            Mejora tu SEO, genera conversiones, expande tu red de contactos y diversifica tus ingresos (patrocinios, afiliados, etc.).
-          </p>
-          <div class="max-w-xl mx-auto">
-            <div *ngIf="tracks.length > 0">
-                <app-audio-player [track]="tracks[1]"></app-audio-player>
-            </div>
-        </div>
-        </div>
-          <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.4s;">
-          <div class="flex justify-center">
-            <svg class="icon-recycle" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 text-center section-title">Contenido Versátil y Reutilizable</h3>
-          <p class="text-gray-600 text-sm text-center">
-            Transforma cada episodio en múltiples activos: blogs, newsletters, videopodcasts, clips para redes sociales (Shorts, Reels, TikToks).
-          </p>
-          <div class="max-w-xl mx-auto">
-            <div *ngIf="tracks.length > 0">
-                <app-audio-player [track]="tracks[1]"></app-audio-player>
-            </div>
-        </div>
-        </div>
-          <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.5s;">
-          <div class="flex justify-center">
-            <svg class="icon-piggy-bank" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V8h2v4zm4 4h-2v-2h2v2zm0-4h-2V8h2v4z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3 text-center section-title">Inversión Inteligente</h3>
-          <p class="text-gray-600 text-sm text-center">
-            El podcasting ofrece un gran retorno con una inversión inicial controlada y alta capacidad de engagement.
-          </p>
-          <div class="max-w-xl mx-auto">
-            <div *ngIf="tracks.length > 0">
-                <app-audio-player [track]="tracks[1]"></app-audio-player>
-            </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  </section>
+                              <div class="audio-player-custom p-4 rounded-lg shadow-lg flex items-center space-x-4">
+                                <button
+                                  (click)="togglePlay()"
+                                  class="play-button-custom flex items-center justify-center"
+                                  [disabled]="!isMetadataLoaded">
+                                  @if (!isPlaying) {
+                                    <i class='bx bx-play-circle'></i>
+                                  }
+                                  @if (isPlaying) {
+                                    <i class='bx bx-pause-circle'></i>
+                                  }
+                                </button>
+                                <div class="flex-grow">
+                                  <p class="font-semibold text-sm">Podcast Demo Kyclops</p>
+                                  <div
+                                    (click)="seekAudio($event)"
+                                    class="w-full h-2 bg-gray-400 rounded-full mt-1 cursor-pointer"
+                                    [class.cursor-not-allowed]="!isMetadataLoaded">
+                                    <div class="h-full bg-[#f92582] rounded-full"
+                                      [style.width.%]="progress || 0">
+                                    </div>
+                                  </div>
+                                  <p class="text-xs mt-1">
+                                    {{ currentTimeFormatted }} / {{ durationFormatted }}
+                                  </p>
+                                </div>
+                              </div>
 
-  <section id="proceso" class="py-16 md:py-24 bg-gray-100">
-    <div class="container mx-auto px-6">
-      <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-4">El Proceso de Kyclops Studio</h2>
-      <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">Te guiamos en cada paso para asegurar el éxito de tu podcast:</p>
-      <div class="max-w-3xl mx-auto space-y-8">
-        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement>
-          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">1. Elección de Nicho y Público Objetivo</h3>
-          <p class="text-gray-600 text-sm">Definimos a quién sirve tu PYME y cómo te diferencias. Creamos tu "arquetipo de cliente" para una estrategia de marketing con sentido.</p>
-        </div>
-        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement style="animation-delay: 0.1s;">
-          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">2. Definición del Formato</h3>
-          <p class="text-gray-600 text-sm">Determinamos el tipo de podcast (entrevistas, narrativo, panel, etc.) que mejor se adapta a tus objetivos y audiencia.</p>
-        </div>
-        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement style="animation-delay: 0.2s;">
-          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">3. Producción de Alta Calidad</h3>
-          <p class="text-gray-600 text-sm">Aseguramos la más alta calidad de audio, considerando acústica, equipo y edición profesional para un sonido impecable.</p>
-        </div>
-        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement style="animation-delay: 0.3s;">
-          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">4. Promoción y Monetización</h3>
-          <p class="text-gray-600 text-sm">Desarrollamos estrategias para que tu podcast genere máximas oportunidades de crecimiento y diversificación de ingresos.</p>
-        </div>
-          <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement style="animation-delay: 0.4s;">
-          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">5. Seguimiento y Optimización</h3>
-          <p class="text-gray-600 text-sm">Analizamos métricas clave (cuantitativas y cualitativas) para optimizar la estrategia, atraer más clientes y asegurar que tu marca sea entendida y valorada.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+                              <audio #audioPlayer [src]="audioSrc" preload="metadata" hidden></audio>
+                            </div>
 
-  <section id="por-que-nosotros" class="py-16 md:py-24 hero-bg text-white">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6 fade-in-up" #animatedElement>¿Listo para que tu Marca Resuene?</h2>
-      <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto fade-in-up" #animatedElement style="animation-delay: 0.2s;">
-        En Kyclops Studio, no solo creamos podcasts, construimos puentes sonoros entre tu marca y tu audiencia.
-        Nos enfocamos en contenido de interés, narrado para enganchar, con constancia y calidad que atraen seguidores fieles.
-      </p>
-      <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-8 mb-12 fade-in-up" #animatedElement style="animation-delay: 0.4s;">
-        <div class="text-center p-6 bg-white/10 rounded-lg max-w-xs w-full">
-          <svg class="w-12 h-12 mx-auto mb-3 text-[#f92582]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 6V3m0 3L6 7m3-4l3-1m-3 1L6 3"></path></svg>
-          <h4 class="font-semibold text-xl mb-1">Estrategia Personalizada</h4>
-          <p class="text-sm opacity-80">Adaptada a tus metas y tu público único.</p>
-        </div>
-        <div class="text-center p-6 bg-white/10 rounded-lg max-w-xs w-full">
-            <svg class="w-12 h-12 mx-auto mb-3 text-[#f92582]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-          <h4 class="font-semibold text-xl mb-1">Calidad Profesional</h4>
-          <p class="text-sm opacity-80">Sonido y contenido que destacan.</p>
-        </div>
-        <div class="text-center p-6 bg-white/10 rounded-lg max-w-xs w-full">
-          <svg class="w-12 h-12 mx-auto mb-3 text-[#f92582]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-          <h4 class="font-semibold text-xl mb-1">Resultados Medibles</h4>
-          <p class="text-sm opacity-80">Enfoque en crecimiento y ROI.</p>
-        </div>
-      </div>
-      <button
-  (click)="openWhatsAppChat('¡Hola! Me gustaría solicitar una consulta estratégica.')"
+                          </div>
+                        </div>
+
+                        <div class="fade-in-up" #animatedElement style="animation-delay: 0.8s;">
+                          <h3 class="text-xl font-semibold mb-4 md:mt-0">Mira Nuestro Trabajo:</h3>
+                          <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/D5djlIq7hEc?si=RLbqcRBvaktQP5L_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section id="servicios" class="py-16 md:py-24 bg-white">
+                    <div class="container mx-auto px-6">
+                      <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-4">Tu Podcast: Un Activo Estratégico Fundamental</h2>
+                      <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">Con Kyclops Studio, tu podcast logrará objetivos clave para tu negocio:</p>
+                      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement>
+                          <div class="flex justify-center">
+                            <svg class="icon-mic" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"></path></svg>
+                          </div>
+                          <h3 class="text-xl font-semibold mb-3 text-center section-title">Humaniza tu Marca</h3>
+                          <p class="text-gray-600 text-sm text-center">
+                            Muestra la personalidad de tu empresa y conecta genuinamente, creando una relación íntima y de confianza con tus oyentes.
+                          </p>
+                          <div class="max-w-xl mx-auto">
+                            @if (tracks.length > 0) {
+                              <div>
+                                <app-audio-player [track]="tracks[2]"></app-audio-player>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.1s;">
+                          <div class="flex justify-center">
+                            <svg class="icon-chart" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"></path></svg>
+                          </div>
+                          <h3 class="text-xl font-semibold mb-3 text-center section-title">Posiciónate como Autoridad</h3>
+                          <p class="text-gray-600 text-sm text-center">
+                            Comparte tu conocimiento, ofrece soluciones y establece tu empresa como un referente indiscutible en tu sector.
+                          </p>
+                          <div class="max-w-xl mx-auto">
+                            @if (tracks.length > 0) {
+                              <div>
+                                <app-audio-player [track]="tracks[3]"></app-audio-player>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.2s;">
+                          <div class="flex justify-center">
+                            <svg class="icon-users" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"></path></svg>
+                          </div>
+                          <h3 class="text-xl font-semibold mb-3 text-center section-title">Fideliza a tu Audiencia</h3>
+                          <p class="text-gray-600 text-sm text-center">
+                            Genera espacios de cercanía y una conexión profunda que se traduce en lealtad duradera y embajadores de marca.
+                          </p>
+                          <div class="max-w-xl mx-auto">
+                            @if (tracks.length > 0) {
+                              <div>
+                                <app-audio-player [track]="tracks[1]"></app-audio-player>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.3s;">
+                          <div class="flex justify-center">
+                            <svg class="icon-megaphone" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12zM7 9h10v2H7zm0-4h10v2H7z"></path></svg>
+                          </div>
+                          <h3 class="text-xl font-semibold mb-3 text-center section-title">Aumenta tu Visibilidad</h3>
+                          <p class="text-gray-600 text-sm text-center">
+                            Mejora tu SEO, genera conversiones, expande tu red de contactos y diversifica tus ingresos (patrocinios, afiliados, etc.).
+                          </p>
+                          <div class="max-w-xl mx-auto">
+                            @if (tracks.length > 0) {
+                              <div>
+                                <app-audio-player [track]="tracks[1]"></app-audio-player>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.4s;">
+                          <div class="flex justify-center">
+                            <svg class="icon-recycle" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"></path></svg>
+                          </div>
+                          <h3 class="text-xl font-semibold mb-3 text-center section-title">Contenido Versátil y Reutilizable</h3>
+                          <p class="text-gray-600 text-sm text-center">
+                            Transforma cada episodio en múltiples activos: blogs, newsletters, videopodcasts, clips para redes sociales (Shorts, Reels, TikToks).
+                          </p>
+                          <div class="max-w-xl mx-auto">
+                            @if (tracks.length > 0) {
+                              <div>
+                                <app-audio-player [track]="tracks[1]"></app-audio-player>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="benefit-card p-6 rounded-lg shadow-lg bg-gray-50 fade-in-up" #animatedElement style="animation-delay: 0.5s;">
+                          <div class="flex justify-center">
+                            <svg class="icon-piggy-bank" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V8h2v4zm4 4h-2v-2h2v2zm0-4h-2V8h2v4z"></path></svg>
+                          </div>
+                          <h3 class="text-xl font-semibold mb-3 text-center section-title">Inversión Inteligente</h3>
+                          <p class="text-gray-600 text-sm text-center">
+                            El podcasting ofrece un gran retorno con una inversión inicial controlada y alta capacidad de engagement.
+                          </p>
+                          <div class="max-w-xl mx-auto">
+                            @if (tracks.length > 0) {
+                              <div>
+                                <app-audio-player [track]="tracks[1]"></app-audio-player>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section id="proceso" class="py-16 md:py-24 bg-gray-100">
+                    <div class="container mx-auto px-6">
+                      <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-4">El Proceso de Kyclops Studio</h2>
+                      <p class="text-center text-gray-600 mb-12 md:mb-16 max-w-2xl mx-auto">Te guiamos en cada paso para asegurar el éxito de tu podcast:</p>
+                      <div class="max-w-3xl mx-auto space-y-8">
+                        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement>
+                          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">1. Elección de Nicho y Público Objetivo</h3>
+                          <p class="text-gray-600 text-sm">Definimos a quién sirve tu PYME y cómo te diferencias. Creamos tu "arquetipo de cliente" para una estrategia de marketing con sentido.</p>
+                        </div>
+                        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement style="animation-delay: 0.1s;">
+                          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">2. Definición del Formato</h3>
+                          <p class="text-gray-600 text-sm">Determinamos el tipo de podcast (entrevistas, narrativo, panel, etc.) que mejor se adapta a tus objetivos y audiencia.</p>
+                        </div>
+                        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement style="animation-delay: 0.2s;">
+                          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">3. Producción de Alta Calidad</h3>
+                          <p class="text-gray-600 text-sm">Aseguramos la más alta calidad de audio, considerando acústica, equipo y edición profesional para un sonido impecable.</p>
+                        </div>
+                        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement style="animation-delay: 0.3s;">
+                          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">4. Promoción y Monetización</h3>
+                          <p class="text-gray-600 text-sm">Desarrollamos estrategias para que tu podcast genere máximas oportunidades de crecimiento y diversificación de ingresos.</p>
+                        </div>
+                        <div class="process-step pl-6 py-4 bg-white rounded-r-lg shadow-md fade-in-up" #animatedElement style="animation-delay: 0.4s;">
+                          <h3 class="text-xl font-semibold mb-2 text-[#f92582]">5. Seguimiento y Optimización</h3>
+                          <p class="text-gray-600 text-sm">Analizamos métricas clave (cuantitativas y cualitativas) para optimizar la estrategia, atraer más clientes y asegurar que tu marca sea entendida y valorada.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section id="por-que-nosotros" class="py-16 md:py-24 hero-bg text-white">
+                    <div class="container mx-auto px-6 text-center">
+                      <h2 class="text-3xl md:text-4xl font-bold mb-6 fade-in-up" #animatedElement>¿Listo para que tu Marca Resuene?</h2>
+                      <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto fade-in-up" #animatedElement style="animation-delay: 0.2s;">
+                        En Kyclops Studio, no solo creamos podcasts, construimos puentes sonoros entre tu marca y tu audiencia.
+                        Nos enfocamos en contenido de interés, narrado para enganchar, con constancia y calidad que atraen seguidores fieles.
+                      </p>
+                      <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-8 mb-12 fade-in-up" #animatedElement style="animation-delay: 0.4s;">
+                        <div class="text-center p-6 bg-white/10 rounded-lg max-w-xs w-full">
+                          <svg class="w-12 h-12 mx-auto mb-3 text-[#f92582]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 6V3m0 3L6 7m3-4l3-1m-3 1L6 3"></path></svg>
+                          <h4 class="font-semibold text-xl mb-1">Estrategia Personalizada</h4>
+                          <p class="text-sm opacity-80">Adaptada a tus metas y tu público único.</p>
+                        </div>
+                        <div class="text-center p-6 bg-white/10 rounded-lg max-w-xs w-full">
+                          <svg class="w-12 h-12 mx-auto mb-3 text-[#f92582]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                          <h4 class="font-semibold text-xl mb-1">Calidad Profesional</h4>
+                          <p class="text-sm opacity-80">Sonido y contenido que destacan.</p>
+                        </div>
+                        <div class="text-center p-6 bg-white/10 rounded-lg max-w-xs w-full">
+                          <svg class="w-12 h-12 mx-auto mb-3 text-[#f92582]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                          <h4 class="font-semibold text-xl mb-1">Resultados Medibles</h4>
+                          <p class="text-sm opacity-80">Enfoque en crecimiento y ROI.</p>
+                        </div>
+                      </div>
+                      <button
+                        (click)="openWhatsAppChat('¡Hola! Me gustaría solicitar una consulta estratégica.')"
   class="cta-button text-base sm:text-lg md:text-xl px-6 py-2 sm:px-8 sm:py-3 md:px-10 md:py-4
          rounded-lg font-bold shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105
          inline-block fade-in-up"
-  #animatedElement
-  style="animation-delay: 0.6s;">
-  Solicita tu Consulta Estratégica
-</button>
-    </div>
-  </section>
+                        #animatedElement
+                        style="animation-delay: 0.6s;">
+                        Solicita tu Consulta Estratégica
+                      </button>
+                    </div>
+                  </section>
 
 
 
-  <footer class="bg-[#1a1a2e] text-gray-300 py-12">
-  <div class="container mx-auto px-6 text-center">
-    <a href="#" class="text-2xl font-bold">
-      <span class="text-white">Kyclops</span><span class="text-[#f92582]">Studio</span>
-    </a>
-    <p class="my-4 text-sm md:text-base"> Marketing Auditivo Estratégico para Marcas con Visión.
-    </p>
-    <div class="flex justify-center space-x-3 sm:space-x-4 md:space-x-6 mb-6"> <ng-container *ngFor="let social of socialMediaLinks">
-        <a [href]="social.url" target="_blank" [attr.aria-label]="social.name"
-           class="text-2xl sm:text-3xl text-gray-300 hover:text-[#f92582] transition duration-300"> <i class="bx" [ngClass]="social.iconClass"></i>
-        </a>
-      </ng-container>
-    </div>
-    <p class="text-xs sm:text-sm">© <span id="currentYear">{{ currentYear }}</span> Kyclops Studio. Todos los derechos reservados.</p>
-    <p class="text-xs sm:text-sm mt-1">Diseñado con ❤️ para conectar voces.</p><p>Dia pesado</p><p>Dia pesado</p><p>Dia pesado 3</p>
-  </div>
-</footer>
-</div>
+                  <footer class="bg-[#1a1a2e] text-gray-300 py-12">
+                    <div class="container mx-auto px-6 text-center">
+                      <a href="#" class="text-2xl font-bold">
+                        <span class="text-white">Kyclops</span><span class="text-[#f92582]">Studio</span>
+                      </a>
+                      <p class="my-4 text-sm md:text-base"> Marketing Auditivo Estratégico para Marcas con Visión.
+                      </p>
+                      <div class="flex justify-center space-x-3 sm:space-x-4 md:space-x-6 mb-6"> @for (social of socialMediaLinks; track social) {
+                        <a [href]="social.url" target="_blank" [attr.aria-label]="social.name"
+                          class="text-2xl sm:text-3xl text-gray-300 hover:text-[#f92582] transition duration-300"> <i class="bx" [ngClass]="social.iconClass"></i>
+                        </a>
+                      }
+                    </div>
+                    <p class="text-xs sm:text-sm">© <span id="currentYear">{{ currentYear }}</span> Kyclops Studio. Todos los derechos reservados.</p>
+                    <p class="text-xs sm:text-sm mt-1">Diseñado con ❤️ para conectar voces.</p><p>Dia pesado</p><p>Dia pesado</p><p>Dia pesado 3</p>
+                  </div>
+                </footer>
+              </div>
